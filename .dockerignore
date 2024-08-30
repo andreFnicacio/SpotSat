@@ -1,0 +1,33 @@
+# Ignorar arquivos específicos
+results/metrics_and_validation.pdf
+results/metrics_training_model.json
+
+# Ignorar ambientes virtuais Python
+spotsat_venv/
+
+# Ignorar diretórios do sistema operacional
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignorar diretórios de dados processados e brutos
+data/
+
+# Ignorar notebooks, se não forem necessários na imagem Docker
+notebook/
+
+# Ignorar arquivos de configuração de ambientes locais
+.env
+*.env
+
+# Diretórios do Git
+.git
+.gitignore
+
+# Outros arquivos e diretórios comuns para ignorar
+*.log
+logs/
+.vscode/
+.idea/
+*.swp
+*.swo

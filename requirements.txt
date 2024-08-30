@@ -19,6 +19,7 @@ exceptiongroup==1.2.2
 executing==2.0.1
 fiona==1.9.6
 fonttools==4.53.1
+fpdf==1.7.2
 geopandas==0.14.4
 ipykernel==6.29.5
 ipython==8.26.0
