@@ -7,7 +7,7 @@ class ClassificationView(APIView):
     def post(self, request):
         # Verifica se o arquivo está presente na requisição
         if 'file' not in request.FILES:
-            return Response({"error": "No file provided"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": f'No file provided{request}'}, status=status.HTTP_400_BAD_REQUEST)
         
         file = request.FILES['file']
         
@@ -15,4 +15,4 @@ class ClassificationView(APIView):
             result = ClassificationController.classify_image(file)
             return Response(result, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error classification": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

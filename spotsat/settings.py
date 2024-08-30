@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'spotsat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'spot_sat_db',
         'USER': 'spotsat',
         'PASSWORD': 'spotsatpwd1312',
@@ -86,6 +86,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 
 
