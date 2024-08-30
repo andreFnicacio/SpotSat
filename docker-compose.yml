@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:13-3.1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: spot_sat_db
+      POSTGRES_USER: spotsat
+      POSTGRES_PASSWORD: spotsatpwd1312
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: spot_sat_db
+      POSTGRES_USER: spotsat
+      POSTGRES_PASSWORD: spotsatpwd1312
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Certifique-se de que o caminho do host esteja correto
+    depends_on:
+      - web
+    command: /bin/sh -c "sleep 10 && nginx -g 'daemon off;'"
+
+volumes:
+  postgres_data:
