@@ -20,4 +20,4 @@ class ConsultationController:
         if cloud_coverage is not None:
             classifications = classifications.filter(cloud_coverage=cloud_coverage)
         
-        return ClassificationSerializer(classifications, many=True).data
+        return ImageSerializer(classifications, many=True).data

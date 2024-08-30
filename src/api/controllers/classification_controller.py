@@ -26,10 +26,10 @@ class ClassificationController:
 
                 # Capture 'cloud_coverage', if available
                 cloud_coverage = src.tags().get('CLOUD_COVER', 'N/A')
-
+                idRaster = str(uuid.uuid4())
                 # Prepare metadata to save in the database
                 image_metadata = {
-                    "idRaster": str(uuid.uuid4()),
+                    "idRaster": idRaster,
                     "classification": classification,
                     "file_name": file.name,
                     "width": src.width,
