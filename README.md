@@ -1,7 +1,3 @@
-O seu README está bastante completo e bem estruturado, mas podemos aprimorar a formatação e apresentação para torná-lo ainda mais legível e visualmente atraente. Vou sugerir algumas melhorias:
-
----
-
 # SpotSat - Desafio de Classificação de Imagens de Satélite
 
 ## Descrição do Projeto
