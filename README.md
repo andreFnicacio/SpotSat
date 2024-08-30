@@ -1,3 +1,7 @@
+O seu README está bastante completo e bem estruturado, mas podemos aprimorar a formatação e apresentação para torná-lo ainda mais legível e visualmente atraente. Vou sugerir algumas melhorias:
+
+---
+
 # SpotSat - Desafio de Classificação de Imagens de Satélite
 
 ## Descrição do Projeto
@@ -8,6 +12,7 @@ Este projeto faz parte do desafio da **SpotSat** e tem como objetivo desenvolver
 
 A estrutura do projeto está organizada da seguinte forma:
 
+```
 SpotSat/
 │
 ├── data/
@@ -68,13 +73,13 @@ SpotSat/
 ├── README.md
 ├── requirements.txt
 └── wait-for-it.sh (se necessário)
-
+```
 
 ### Descrição das Pastas
 
 - **data/processed/**: Contém os arquivos processados, incluindo dados de treinamento e validação em formato NPY e Shapefile.
 - **data/raw/**: Contém os arquivos brutos, como shapefiles de treinamento/validação e arquivos TIFF.
-- **model/**: Armazena o modelo treinado (random_forest_model.joblib) na subpasta agent.
+- **model/**: Armazena o modelo treinado (`random_forest_model.joblib`) na subpasta `agent`.
 - **notebooks/**: Contém notebooks Jupyter para exploração de dados e treinamento do modelo.
   - **exploration/**: Explorando e analisando os dados inicialmente.
   - **training/**: Treinamento e validação do modelo Random Forest.
@@ -97,19 +102,17 @@ SpotSat/
 ### Executando com Docker
 
 1. Clone o repositório:
-   
-bash
+   ```bash
    git clone https://github.com/seu_usuario/seu_repositorio.git
    cd seu_repositorio
-
+   ```
 
 2. Construa e inicie os containers:
-   
-bash
+   ```bash
    sudo docker-compose up --build
+   ```
 
-
-3. Acesse a API Django na porta 8000.
+3. Acesse a API Django na porta `8000`.
 
 ### Executando os Notebooks
 
@@ -117,18 +120,18 @@ Os notebooks podem ser abertos e executados no Visual Studio Code, Jupyter Noteb
 
 ## Endpoints da API
 
-### POST /api/classification/
+### POST `/api/classification/`
 
 Recebe um arquivo TIFF e retorna a classificação (floresta ou não-floresta) junto com os metadados da imagem.
 
 **Exemplo de Uso com CURL:**
-bash
+```bash
 curl -X POST http://localhost:8000/api/classification/ \
   -H "Content-Type: multipart/form-data" \
   -F "file=@/caminho/para/seu/arquivo.tif"
-
+```
 **Exemplo de Resposta (200):**
-json
+```json
 {
   "id": 1,
   "file_path": "FAA_UTM18N_NAD83.tif",
@@ -148,18 +151,18 @@ json
     "cloud_coverage": "N/A"
   }
 }
-
+```
 --------------------------------
-### GET /api/consultation/
+### GET `/api/consultation/`
 
-Permite consultar as classificações anteriores, com opções de filtro por idRaster, range de datas ou cloud_coverage.
+Permite consultar as classificações anteriores, com opções de filtro por `idRaster`, `range de datas` ou `cloud_coverage`.
 
 **Exemplo de Uso com CURL:**
-bash
+```bash
 curl -X GET "http://localhost:8000/api/consultation/?idRaster=<UUID>"
-
+```
 **Exemplo de Resposta (200):**
-json
+```json
 {
   "id": 1,
   "file_path": "FAA_UTM18N_NAD83.tif",
@@ -179,18 +182,18 @@ json
     "cloud_coverage": "N/A"
   }
 }
-
+```
 -------------------------------
-### GET /api/metrics/
+### GET `/api/metrics/`
 
 Retorna as métricas de avaliação do modelo em formato JSON.
 
 **Exemplo de Uso com CURL:**
-bash
+```bash
 curl -X GET http://localhost:8000/api/metrics/
-
+```
 **Exemplo de Resposta (200):**
-json
+```json
 {
   "precision": [0.98, 0.78],
   "recall": [0.73, 0.98],
@@ -200,7 +203,22 @@ json
     [1, 65]
   ]
 }
--------------------------------
+```
+--------------------------------
+## Métricas do Modelo
+
+Após o treinamento do modelo **Random Forest**, os seguintes resultados foram obtidos:
+
+- **Matriz de Confusão**:
+  ```plaintext
+  [[48, 18],
+   [1,  65]]
+  ```
+
+- **Relatório de Classificação**:
+  - **Precisão**: 98% (Floresta), 78% (Não-Floresta)
+  - **Recall**: 73% (Floresta), 98% (Não-Floresta)
+  - **Acurácia**: 86%
 Claro! Aqui está a seção dos testes reformulada para adicionar ao seu README:
 
 ---
@@ -233,24 +251,10 @@ Para executar todos os testes, siga os passos abaixo:
 
 Este comando irá executar todos os testes definidos na pasta `tests` dentro de `src/api/`, permitindo que você valide rapidamente se o sistema está funcionando conforme esperado.
 
---------------------------------
-## Métricas do Modelo
-
-Após o treinamento do modelo **Random Forest**, os seguintes resultados foram obtidos:
-
-- **Matriz de Confusão**:
-  
-plaintext
-  [[48, 18],
-   [1,  65]]
-
-
-- **Relatório de Classificação**:
-  - **Precisão**: 98% (Floresta), 78% (Não-Floresta)
-  - **Recall**: 73% (Floresta), 98% (Não-Floresta)
-  - **Acurácia**: 86%
-
-Essas métricas são salvas em um arquivo JSON (metrics_training_model.json) e em um PDF (metrics_and_validation.pdf), na pasta **results**.
-
+---
 ## Conclusão
-Este projeto foi desenvolvido como parte de um desafio proposto pela SpotSat, com o objetivo de criar uma solução eficaz para a classificação de imagens de satélite. Ele utiliza ferramentas modernas como Docker, Django, e Random Forest, e segue boas práticas de desenvolvimento de software e machine learning.
+
+Este projeto foi desenvolvido como parte de um desafio da SpotSat, com o objetivo de criar uma solução para a classificação de imagens de satélite em áreas de floresta e não-floresta. Utilizando tecnologias modernas como Django, PostGIS, Random Forest, e Docker, o projeto oferece uma API robusta, bem documentada e testada, pronta para ser aplicada em diversos cenários práticos de monitoramento e análise de imagens geoespaciais. A estrutura clara e modular do projeto permite fácil manutenção e escalabilidade, tornando-o uma base sólida para futuros desenvolvimentos.
+
+---
+
